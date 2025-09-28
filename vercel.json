@@ -1,0 +1,8 @@
+{
+  "routes": [
+    { "src": "/", "dest": "/game-g12-gauss.html" },
+    { "src": "/gauss", "dest": "/game-g12-gauss.html" },
+    { "src": "/math", "dest": "/math-g6-ch1-game.html" },
+    { "src": "/quiz", "dest": "/quz-g6-ch1.html" }
+  ]
+}
