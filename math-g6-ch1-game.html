@@ -58,6 +58,36 @@
             margin-bottom: 20px;
         }
         
+        .language-selector {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            display: flex;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            border-radius: 20px;
+            padding: 5px 10px;
+            border: 1px solid rgba(255, 215, 0, 0.3);
+            z-index: 100;
+        }
+        
+        .language-selector select {
+            background: transparent;
+            border: none;
+            color: #FFD700;
+            font-size: 14px;
+            font-weight: bold;
+            outline: none;
+            cursor: pointer;
+            padding: 5px;
+            border-radius: 5px;
+        }
+        
+        .language-selector option {
+            background: #1a2a6c;
+            color: white;
+        }
+        
         .stats-container {
             display: flex;
             justify-content: space-between;
@@ -330,6 +360,12 @@
                 flex-direction: column;
                 gap: 15px;
             }
+            
+            .language-selector {
+                position: static;
+                margin-top: 15px;
+                justify-content: center;
+            }
         }
         
         /* Animations */
@@ -357,18 +393,28 @@
 <body>
     <div id="game-container">
         <div class="header">
-            <h1 class="title">NUMBER SHOWDOWN</h1>
-            <p class="subtitle">Which number is larger? Choose wisely!</p>
+            <h1 class="title" data-i18n="title">NUMBER SHOWDOWN</h1>
+            <p class="subtitle" data-i18n="subtitle">Which number is larger? Choose wisely!</p>
+            <div class="language-selector">
+                <i class="fas fa-globe" style="color: #FFD700; margin-right: 8px;"></i>
+                <select id="language-select">
+                    <option value="eng">English</option>
+                    <option value="tam">தமிழ்</option>
+                    <option value="tel">తెలుగు</option>
+                    <option value="hin">हिन्दी</option>
+                    <option value="ori">ଓଡ଼ିଆ</option>
+                </select>
+            </div>
         </div>
         
         <div class="stats-container">
             <div class="stat">
                 <div class="stat-value" id="score">0</div>
-                <div class="stat-label">SCORE</div>
+                <div class="stat-label" data-i18n="score">SCORE</div>
             </div>
             <div class="stat">
                 <div class="stat-value" id="level">1</div>
-                <div class="stat-label">LEVEL</div>
+                <div class="stat-label" data-i18n="level">LEVEL</div>
             </div>
             <div class="stat">
                 <div class="lives" id="lives">
@@ -376,13 +422,13 @@
                     <span class="life"><i class="fas fa-heart"></i></span>
                     <span class="life"><i class="fas fa-heart"></i></span>
                 </div>
-                <div class="stat-label">LIVES</div>
+                <div class="stat-label" data-i18n="lives">LIVES</div>
             </div>
         </div>
         
         <div class="hint-container">
-            <div class="hint-text">Need help? Use the hint button below!</div>
-            <div class="hint-points">Earn 25 points for each correct answer without using hints</div>
+            <div class="hint-text" data-i18n="hint">Need help? Use the hint button below!</div>
+            <div class="hint-points" data-i18n="hintPoints">Earn 25 points for each correct answer without using hints</div>
         </div>
         
         <div class="feedback" id="feedback"></div>
@@ -402,29 +448,153 @@
         </div>
         
         <div class="controls">
-            <button id="play-btn"><i class="fas fa-play"></i> Play</button>
-            <button id="hint-btn"><i class="fas fa-lightbulb"></i> Hint (-10 points)</button>
+            <button id="play-btn" data-i18n="play"><i class="fas fa-play"></i> Play</button>
+            <button id="hint-btn" data-i18n="hintButton"><i class="fas fa-lightbulb"></i> Hint (-10 points)</button>
         </div>
         
         <div class="level-up" id="level-up">
-            <h2>LEVEL UP!</h2>
-            <p>You've reached level <span id="new-level">2</span>!</p>
-            <p>Numbers will now be larger and more challenging!</p>
-            <button id="continue-btn"><i class="fas fa-arrow-right"></i> Continue</button>
+            <h2 data-i18n="levelUp">LEVEL UP!</h2>
+            <p data-i18n="levelUpMessage">You've reached level <span id="new-level">2</span>!</p>
+            <p data-i18n="levelUpChallenge">Numbers will now be larger and more challenging!</p>
+            <button id="continue-btn" data-i18n="continue"><i class="fas fa-arrow-right"></i> Continue</button>
         </div>
         
         <div class="game-over" id="game-over">
-            <h2>GAME OVER</h2>
-            <p>Your final score: <span id="final-score">0</span></p>
-            <p>You reached level: <span id="final-level">1</span></p>
-                        <div style="display:flex;gap:12px;align-items:center;justify-content:center;">
-                            <button id="restart-btn"><i class="fas fa-redo"></i> Play Again</button>
-                            <button id="finish-btn" style="background:linear-gradient(135deg,#34d399,#10b981);"><i class="fas fa-check"></i> Finish</button>
-                        </div>
+            <h2 data-i18n="gameOver">GAME OVER</h2>
+            <p data-i18n="finalScore">Your final score: <span id="final-score">0</span></p>
+            <p data-i18n="finalLevel">You reached level: <span id="final-level">1</span></p>
+            <div style="display:flex;gap:12px;align-items:center;justify-content:center;">
+                <button id="restart-btn" data-i18n="playAgain"><i class="fas fa-redo"></i> Play Again</button>
+                <button id="finish-btn" style="background:linear-gradient(135deg,#34d399,#10b981);" data-i18n="finish"><i class="fas fa-check"></i> Finish</button>
+            </div>
         </div>
     </div>
 
     <script>
+        // Translations for different languages
+        const translations = {
+            eng: {
+                title: "NUMBER SHOWDOWN",
+                subtitle: "Which number is larger? Choose wisely!",
+                score: "SCORE",
+                level: "LEVEL",
+                lives: "LIVES",
+                hint: "Need help? Use the hint button below!",
+                hintPoints: "Earn 25 points for each correct answer without using hints",
+                play: "Play",
+                restart: "Restart",
+                hintButton: "Hint (-10 points)",
+                correct: "Correct! +{points} points 🎉",
+                incorrect: "Incorrect! 😢",
+                levelUp: "LEVEL UP!",
+                levelUpMessage: "You've reached level {level}!",
+                levelUpChallenge: "Numbers will now be larger and more challenging!",
+                continue: "Continue",
+                gameOver: "GAME OVER",
+                finalScore: "Your final score: {score}",
+                finalLevel: "You reached level: {level}",
+                playAgain: "Play Again",
+                finish: "Finish",
+                hintUsed: "Hint used! -10 points"
+            },
+            tam: {
+                title: "எண் மோதல்",
+                subtitle: "எந்த எண் பெரியது? ஞாபகமாகத் தேர்ந்தெடுங்கள்!",
+                score: "மதிப்பெண்",
+                level: "நிலை",
+                lives: "வாழ்க்கைகள்",
+                hint: "உதவி தேவையா? கீழே உள்ள உதவி பொத்தானைப் பயன்படுத்தவும்!",
+                hintPoints: "உதவி பயன்படுத்தாமல் ஒவ்வொரு சரியான பதிலுக்கும் 25 புள்ளிகள் பெறுங்கள்",
+                play: "விளையாடு",
+                restart: "மீண்டும் தொடங்கு",
+                hintButton: "உதவி (-10 புள்ளிகள்)",
+                correct: "சரி! +{points} புள்ளிகள் 🎉",
+                incorrect: "தவறு! 😢",
+                levelUp: "நிலை உயர்வு!",
+                levelUpMessage: "நீங்கள் {level} நிலையை அடைந்துவிட்டீர்கள்!",
+                levelUpChallenge: "எண்கள் இப்போது பெரியவை மற்றும் சவாலானவை!",
+                continue: "தொடரவும்",
+                gameOver: "விளையாட்டு முடிந்தது",
+                finalScore: "உங்களின் இறுதி மதிப்பெண்: {score}",
+                finalLevel: "நீங்கள் அடைந்த நிலை: {level}",
+                playAgain: "மீண்டும் விளையாடு",
+                finish: "முடிக்க",
+                hintUsed: "உதவி பயன்படுத்தப்பட்டது! -10 புள்ளிகள்"
+            },
+            tel: {
+                title: "సంఖ్యల పోటీ",
+                subtitle: "ఏ సంఖ్య పెద్దది? తెలివిగా ఎంచుకోండి!",
+                score: "స్కోరు",
+                level: "స్థాయి",
+                lives: "జీవితాలు",
+                hint: "సహాయం అవసరమా? క్రింద ఉన్న సూచన బటన్‌ను ఉపయోగించండి!",
+                hintPoints: "సూచనలు ఉపయోగించకుండా ప్�తి సరైన సమాధానానికి 25 పాయింట్లు సంపాదించండి",
+                play: "ఆడండి",
+                restart: "పునఃప్రారంభించండి",
+                hintButton: "సూచన (-10 పాయింట్లు)",
+                correct: "సరైనది! +{points} పాయింట్లు 🎉",
+                incorrect: "తప్పు! 😢",
+                levelUp: "స్థాయి పెరిగింది!",
+                levelUpMessage: "మీరు {level} స్థాయికి చేరుకున్నారు!",
+                levelUpChallenge: "ఇప్పుడు సంఖ్యలు పెద్దవి మరియు సవాలుగా ఉంటాయి!",
+                continue: "కొనసాగించు",
+                gameOver: "గేమ్ ముగిసింది",
+                finalScore: "మీ తుది స్కోరు: {score}",
+                finalLevel: "మీరు చేరుకున్న స్థాయి: {level}",
+                playAgain: "మళ్ళీ ఆడండి",
+                finish: "ముగించు",
+                hintUsed: "సూచన ఉపయోగించబడింది! -10 పాయింట్లు"
+            },
+            hin: {
+                title: "नंबर शोडाउन",
+                subtitle: "कौन सी संख्या बड़ी है? बुद्धिमानी से चुनें!",
+                score: "स्कोर",
+                level: "स्तर",
+                lives: "जीवन",
+                hint: "मदद चाहिए? नीचे दिए गए संकेत बटन का उपयोग करें!",
+                hintPoints: "संकेत का उपयोग किए बिना प्रत्येक सही उत्तर के लिए 25 अंक अर्जित करें",
+                play: "खेलें",
+                restart: "पुनः प्रारंभ करें",
+                hintButton: "संकेत (-10 अंक)",
+                correct: "सही! +{points} अंक 🎉",
+                incorrect: "गलत! 😢",
+                levelUp: "स्तर ऊपर!",
+                levelUpMessage: "आपने स्तर {level} प्राप्त किया है!",
+                levelUpChallenge: "अब संख्याएँ बड़ी और चुनौतीपूर्ण होंगी!",
+                continue: "जारी रखें",
+                gameOver: "खेल खत्म",
+                finalScore: "आपका अंतिम स्कोर: {score}",
+                finalLevel: "आपने जो स्तर प्राप्त किया: {level}",
+                playAgain: "फिर से खेलें",
+                finish: "समाप्त",
+                hintUsed: "संकेत का उपयोग किया गया! -10 अंक"
+            },
+            ori: {
+                title: "ସଂଖ୍ୟା ମୁକାବିଳା",
+                subtitle: "କେଉଁ ସଂଖ୍ୟା ବଡ଼? ବୁଦ୍ଧିମତାରେ ବାଛନ୍ତୁ!",
+                score: "ସ୍କୋର୍",
+                level: "ସ୍ତର",
+                lives: "ଜୀବନ",
+                hint: "ସାହାଯ୍ୟ ଆବଶ୍ୟକ? ତଳେ ଥିବା ସୂଚନା ବଟନ୍ ବ୍ୟବହାର କରନ୍ତୁ!",
+                hintPoints: "ସୂଚନା ବ୍ୟବହାର ନକରି ପ୍ରତ୍ୟେକ ସଠିକ୍ ଉତ୍ତର ପାଇଁ 25 ପଏଣ୍ଟ ଅର୍ଜନ କରନ୍ତୁ",
+                play: "ଖେଳ",
+                restart: "ପୁନଃଆରମ୍ଭ କରନ୍ତୁ",
+                hintButton: "ସୂଚନା (-10 ପଏଣ୍ଟ)",
+                correct: "ସଠିକ୍! +{points} ପଏଣ୍ଟ 🎉",
+                incorrect: "ଭୁଲ୍! 😢",
+                levelUp: "ସ୍ତର ବଢ଼ିଲା!",
+                levelUpMessage: "ଆପଣ ସ୍ତର {level} ରେ ପହଞ୍ଚିଛନ୍ତି!",
+                levelUpChallenge: "ଏବେ ସଂଖ୍ୟାଗୁଡ଼ିକ ବଡ଼ ଏବଂ ଅଧିକ ଚାଲେଞ୍ଜିଙ୍ଗ ହେବ!",
+                continue: "ଆଗକୁ ବଢ଼ନ୍ତୁ",
+                gameOver: "ଖେଳ ଶେଷ",
+                finalScore: "ଆପଣଙ୍କର ଶେଷ ସ୍କୋର୍: {score}",
+                finalLevel: "ଆପଣ ଯେଉଁ ସ୍ତରରେ ପହଞ୍ଚିଛନ୍ତି: {level}",
+                playAgain: "ପୁଣି ଖେଳ",
+                finish: "ସମାପ୍ତ",
+                hintUsed: "ସୂଚନା ବ୍ୟବହାର ହୋଇଛି! -10 ପଏଣ୍ଟ"
+            }
+        };
+
         // Game variables
         let score = 0;
         let level = 1;
@@ -433,6 +603,7 @@
         let correctAnswer;
         let isGameActive = false;
         let usedHint = false;
+        let currentLanguage = 'eng';
         
         // DOM elements
         const leftNumberElement = document.getElementById('left-value');
@@ -452,7 +623,56 @@
         const finalScoreElement = document.getElementById('final-score');
         const finalLevelElement = document.getElementById('final-level');
         const restartButton = document.getElementById('restart-btn');
-    const finishButton = document.getElementById('finish-btn');
+        const finishButton = document.getElementById('finish-btn');
+        const languageSelect = document.getElementById('language-select');
+        
+        // Function to update the language
+        function updateLanguage(lang) {
+            currentLanguage = lang;
+            
+            // Save language preference to localStorage
+            localStorage.setItem('preferredLanguage', lang);
+            
+            // Update all elements with data-i18n attribute
+            const elements = document.querySelectorAll('[data-i18n]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-i18n');
+                const translation = translations[lang][key];
+                
+                if (translation) {
+                    // Handle placeholders like {score}, {level}, {points}
+                    const text = translation
+                        .replace('{score}', score)
+                        .replace('{level}', level)
+                        .replace('{points}', usedHint ? '10' : '25');
+                    
+                    // If the element has child elements (like spans), preserve them
+                    if (element.children.length > 0) {
+                        const tempDiv = document.createElement('div');
+                        tempDiv.innerHTML = text;
+                        
+                        // Replace only the text nodes, preserving child elements
+                        Array.from(element.childNodes).forEach(node => {
+                            if (node.nodeType === Node.TEXT_NODE) {
+                                node.textContent = '';
+                            }
+                        });
+                        
+                        // Insert the translated text at the beginning
+                        element.insertBefore(tempDiv.firstChild, element.firstChild);
+                    } else {
+                        element.textContent = text;
+                    }
+                }
+            });
+            
+            // Update play button text based on game state
+            if (isGameActive) {
+                playButton.innerHTML = `<i class="fas fa-redo"></i> ${translations[lang].restart}`;
+            } else {
+                playButton.innerHTML = `<i class="fas fa-play"></i> ${translations[lang].play}`;
+            }
+        }
         
         // Initialize the game
         function initGame() {
@@ -463,14 +683,12 @@
             usedHint = false;
             
             updateUI();
+            updateLanguage(currentLanguage);
             generateNumbers();
             
             // Hide screens
             levelUpScreen.classList.remove('active');
             gameOverScreen.classList.remove('active');
-            
-            // Change play button to restart
-            playButton.innerHTML = '<i class="fas fa-redo"></i> Restart';
         }
         
         // Generate random numbers based on current level
@@ -524,9 +742,11 @@
             const pointsEarned = usedHint ? 10 : 25;
             
             // Visual feedback
-            feedbackElement.textContent = isCorrect ? 
-                `Correct! +${pointsEarned} points 🎉` : 
-                'Incorrect! 😢';
+            const feedbackText = isCorrect ? 
+                translations[currentLanguage].correct.replace('{points}', pointsEarned) : 
+                translations[currentLanguage].incorrect;
+                
+            feedbackElement.textContent = feedbackText;
             feedbackElement.className = `feedback ${isCorrect ? 'correct' : 'incorrect'}`;
             feedbackElement.style.opacity = '1';
             
@@ -579,7 +799,8 @@
             level++;
             isGameActive = false;
             
-            // Show level up screen
+            // Update level up screen with current language
+            updateLanguage(currentLanguage);
             newLevelElement.textContent = level;
             levelUpScreen.classList.add('active');
         }
@@ -588,7 +809,8 @@
         function gameOver() {
             isGameActive = false;
             
-            // Show game over screen
+            // Update game over screen with current language
+            updateLanguage(currentLanguage);
             finalScoreElement.textContent = score;
             finalLevelElement.textContent = level;
             gameOverScreen.classList.add('active');
@@ -618,7 +840,7 @@
             usedHint = true;
             
             // Visual feedback for hint
-            feedbackElement.textContent = `Hint used! -10 points`;
+            feedbackElement.textContent = translations[currentLanguage].hintUsed;
             feedbackElement.className = 'feedback incorrect';
             feedbackElement.style.opacity = '1';
             
@@ -649,6 +871,10 @@
                 generateNumbers();
             });
             restartButton.addEventListener('click', initGame);
+            languageSelect.addEventListener('change', (e) => {
+                updateLanguage(e.target.value);
+            });
+            
             // Finish button navigates back to chapter list
             finishButton?.addEventListener('click', () => {
                 // Optionally save progress here
@@ -660,6 +886,12 @@
         // Start the game when the page loads
         window.addEventListener('load', () => {
             setupEventListeners();
+            
+            // Load saved language preference or default to English
+            const savedLanguage = localStorage.getItem('preferredLanguage') || 'eng';
+            languageSelect.value = savedLanguage;
+            updateLanguage(savedLanguage);
+            
             // Show initial state
             generateNumbers();
         });
