@@ -22,27 +22,32 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 10px;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
         }
         
         .game-container {
             background: rgba(255, 255, 255, 0.95);
-            border-radius: 25px;
+            border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             width: 100%;
             max-width: 1200px;
             overflow: hidden;
             backdrop-filter: blur(10px);
+            transform: translateZ(0);
+            will-change: transform;
         }
         
         .game-header {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 25px;
+            padding: 20px;
             text-align: center;
             position: relative;
             overflow: hidden;
+            transform: translateZ(0);
         }
         
         .game-header::before {
@@ -54,6 +59,7 @@
             height: 200%;
             background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
             animation: pulse 4s ease-in-out infinite;
+            will-change: transform;
         }
         
         @keyframes pulse {
@@ -63,49 +69,65 @@
         
         .game-title {
             font-family: 'Orbitron', monospace;
-            font-size: 32px;
+            font-size: 24px;
             font-weight: 900;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
             position: relative;
             z-index: 1;
+            transform: translateZ(0);
         }
         
         .game-subtitle {
-            font-size: 18px;
+            font-size: 16px;
             opacity: 0.9;
             position: relative;
             z-index: 1;
+            transform: translateZ(0);
         }
         
         .language-selector {
             position: absolute;
-            top: 20px;
-            right: 20px;
-            z-index: 2;
+            top: 15px;
+            right: 15px;
+            z-index: 10;
             display: flex;
             align-items: center;
             background: rgba(255, 255, 255, 0.2);
             border-radius: 25px;
-            padding: 5px;
+            padding: 6px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            transform: translateZ(0);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .language-selector:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
         }
         
         .globe-icon {
             margin-right: 8px;
             font-size: 18px;
+            transform: translateZ(0);
         }
         
         .language-select {
             background: transparent;
             border: none;
             color: white;
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 500;
             cursor: pointer;
             outline: none;
-            padding: 5px 10px;
+            padding: 4px 8px;
             border-radius: 20px;
-            transition: background 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            appearance: none;
+            transform: translateZ(0);
         }
         
         .language-select:hover {
@@ -118,68 +140,78 @@
         }
         
         .game-content {
-            padding: 30px;
+            padding: 20px;
+            transform: translateZ(0);
         }
         
         .puzzle-container {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
             box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.1);
+            transform: translateZ(0);
         }
         
         .puzzle-title {
-            font-size: 24px;
+            font-size: 20px;
             font-weight: 700;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: #333;
             text-align: center;
+            transform: translateZ(0);
         }
         
         .gauss-container {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 15px;
+            transform: translateZ(0);
         }
         
         .gauss-visualization {
-            height: 500px;
+            height: 350px;
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             border-radius: 15px;
             position: relative;
             overflow: hidden;
             border: 2px solid #e0e0e0;
+            transform: translateZ(0);
+            will-change: transform;
+            touch-action: none;
         }
         
         .gauss-charge {
             position: absolute;
-            width: 50px;
-            height: 50px;
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             display: flex;
             justify-content: center;
             align-items: center;
-            font-size: 24px;
+            font-size: 18px;
             font-weight: 700;
             color: white;
             z-index: 5;
             user-select: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateZ(0);
+            will-change: transform;
         }
         
         .gauss-charge.positive {
             background: radial-gradient(circle at 30% 30%, #ff6b6b, #ee5a24);
-            box-shadow: 0 0 20px rgba(255, 107, 107, 0.5);
+            box-shadow: 0 0 15px rgba(255, 107, 107, 0.5);
         }
         
         .gauss-charge.negative {
             background: radial-gradient(circle at 30% 30%, #4ecdc4, #44a3aa);
-            box-shadow: 0 0 20px rgba(78, 205, 196, 0.5);
+            box-shadow: 0 0 15px rgba(78, 205, 196, 0.5);
         }
         
         .gauss-charge.enclosed {
             animation: pulse-charge 1s ease-in-out infinite;
+            will-change: transform;
         }
         
         @keyframes pulse-charge {
@@ -189,15 +221,17 @@
         
         .gaussian-surface {
             position: absolute;
-            border: 4px dashed #667eea;
+            border: 3px dashed #667eea;
             border-radius: 50%;
             background: rgba(102, 126, 234, 0.1);
             cursor: grab;
             z-index: 15;
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             justify-content: center;
             align-items: center;
+            transform: translateZ(0);
+            will-change: transform;
         }
         
         .gaussian-surface:hover {
@@ -223,17 +257,20 @@
             left: 50%;
             transform: translate(-50%, -50%);
             box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
-            transition: all 0.3s ease;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
         }
         
         .gaussian-surface:hover .surface-handle {
             background: #ff9ff3;
             box-shadow: 0 0 15px rgba(255, 159, 243, 0.7);
+            transform: translate(-50%, -50%) scale(1.2);
         }
         
         .gaussian-surface.dragging .surface-handle {
             background: #ff6b6b;
             box-shadow: 0 0 20px rgba(255, 107, 107, 0.8);
+            transform: translate(-50%, -50%) scale(1.3);
         }
         
         .field-lines {
@@ -244,6 +281,8 @@
             height: 100%;
             pointer-events: none;
             z-index: 1;
+            transform: translateZ(0);
+            will-change: opacity;
         }
         
         .field-line {
@@ -251,76 +290,112 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, rgba(102, 126, 234, 0.3), transparent);
             transform-origin: left center;
+            opacity: 0.8;
+            transition: opacity 0.3s ease;
+            will-change: transform, opacity;
         }
         
         .flux-indicator {
             position: absolute;
-            top: 20px;
-            right: 20px;
+            top: 10px;
+            right: 10px;
             background: rgba(255, 255, 255, 0.95);
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
             z-index: 20;
-            min-width: 200px;
+            min-width: 150px;
+            max-width: 40%;
+            transform: translateZ(0);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+        
+        .flux-indicator:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
         }
         
         .flux-label {
-            font-size: 14px;
+            font-size: 12px;
             color: #666;
-            margin-bottom: 8px;
+            margin-bottom: 6px;
             font-weight: 500;
+            transform: translateZ(0);
         }
         
         .flux-value {
-            font-size: 28px;
+            font-size: 20px;
             font-weight: 700;
             color: #667eea;
             margin-bottom: 5px;
+            transform: translateZ(0);
+            transition: all 0.3s ease;
         }
         
         .enclosed-value {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 600;
             color: #764ba2;
-            margin-top: 10px;
-            padding-top: 10px;
+            margin-top: 8px;
+            padding-top: 8px;
             border-top: 1px solid #e0e0e0;
+            transform: translateZ(0);
+            transition: all 0.3s ease;
         }
         
         .flux-bar {
             width: 100%;
-            height: 8px;
+            height: 6px;
             background: #e0e0e0;
-            border-radius: 4px;
-            margin-top: 10px;
+            border-radius: 3px;
+            margin-top: 8px;
             overflow: hidden;
+            transform: translateZ(0);
+            will-change: transform;
         }
         
         .flux-fill {
             height: 100%;
             background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 4px;
-            transition: width 0.5s ease;
+            border-radius: 3px;
+            transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateZ(0);
+            will-change: width;
         }
         
         .success-message {
             background: linear-gradient(135deg, #4caf50, #45a049);
             color: white;
-            padding: 20px;
+            padding: 15px;
             border-radius: 10px;
             text-align: center;
-            margin-top: 20px;
-            font-size: 18px;
+            margin-top: 15px;
+            font-size: 16px;
             font-weight: 500;
+            transform: translateZ(0);
+            animation: slideIn 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            will-change: transform;
+        }
+        
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
         
         .controls-container {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-top: 30px;
+            gap: 10px;
+            margin-top: 20px;
             flex-wrap: wrap;
+            transform: translateZ(0);
         }
         
         .control-btn {
@@ -328,19 +403,42 @@
             color: white;
             border: none;
             border-radius: 25px;
-            padding: 12px 25px;
-            font-size: 16px;
+            padding: 10px 20px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
+            transform: translateZ(0);
+            will-change: transform;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .control-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            transition: left 0.5s;
+        }
+        
+        .control-btn:hover::before {
+            left: 100%;
         }
         
         .control-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .control-btn:active {
+            transform: translateY(0);
         }
         
         .control-btn:disabled {
@@ -360,64 +458,92 @@
         
         .instructions {
             background: white;
-            padding: 20px;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.08);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.08);
             text-align: center;
-            font-size: 16px;
+            font-size: 14px;
             color: #555;
+            transform: translateZ(0);
+            transition: all 0.3s ease;
+        }
+        
+        .instructions:hover {
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
         }
         
         .drag-hint {
             background: linear-gradient(135deg, #feca57, #ff9ff3);
             color: white;
-            padding: 10px 15px;
-            border-radius: 20px;
-            font-size: 14px;
+            padding: 8px 12px;
+            border-radius: 15px;
+            font-size: 12px;
             font-weight: 600;
             position: absolute;
-            bottom: 20px;
+            bottom: 15px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 25;
-            box-shadow: 0 3px 15px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
             animation: bounce 2s infinite;
+            max-width: 80%;
+            text-align: center;
+            will-change: transform;
         }
         
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% { transform: translateX(-50%) translateY(0); }
-            40% { transform: translateX(-50%) translateY(-10px); }
-            60% { transform: translateX(-50%) translateY(-5px); }
+            40% { transform: translateX(-50%) translateY(-8px); }
+            60% { transform: translateX(-50%) translateY(-4px); }
         }
         
         .charge-info {
             background: white;
-            padding: 15px;
+            padding: 12px;
             border-radius: 10px;
-            margin-top: 15px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-top: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            transform: translateZ(0);
+            transition: all 0.3s ease;
+        }
+        
+        .charge-info:hover {
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
         }
         
         .charge-info-title {
-            font-size: 14px;
+            font-size: 12px;
             font-weight: 600;
             color: #666;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            transform: translateZ(0);
         }
         
         .charge-list {
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
+            justify-content: center;
+            transform: translateZ(0);
         }
         
         .charge-item {
-            padding: 5px 10px;
-            border-radius: 15px;
-            font-size: 12px;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 11px;
             font-weight: 600;
             color: white;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateZ(0);
+            will-change: transform;
+        }
+        
+        .charge-item:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
         }
         
         .charge-item.positive {
@@ -429,50 +555,166 @@
         }
         
         .charge-item.enclosed {
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+            box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
             transform: scale(1.1);
+            animation: pulse-charge 1s ease-in-out infinite;
         }
         
         @media (max-width: 768px) {
             .game-header {
-                padding: 20px;
+                padding: 15px;
             }
             
             .game-title {
-                font-size: 24px;
+                font-size: 20px;
+            }
+            
+            .game-subtitle {
+                font-size: 14px;
             }
             
             .language-selector {
-                position: static;
-                margin-top: 15px;
-                text-align: center;
-                justify-content: center;
+                top: 10px;
+                right: 10px;
+                padding: 4px;
             }
             
-            .game-content {
-                padding: 20px;
-            }
-            
-            .gauss-visualization {
-                height: 400px;
-            }
-            
-            .flux-indicator {
-                padding: 15px;
-                min-width: 150px;
-            }
-            
-            .flux-value {
-                font-size: 24px;
-            }
-            
-            .enclosed-value {
+            .globe-icon {
                 font-size: 16px;
             }
             
-            .drag-hint {
+            .language-select {
                 font-size: 12px;
-                padding: 8px 12px;
+                padding: 3px 6px;
+            }
+            
+            .game-content {
+                padding: 15px;
+            }
+            
+            .gauss-visualization {
+                height: 300px;
+            }
+            
+            .gauss-charge {
+                width: 35px;
+                height: 35px;
+                font-size: 16px;
+            }
+            
+            .flux-indicator {
+                padding: 12px;
+                min-width: 130px;
+                max-width: 35%;
+            }
+            
+            .flux-value {
+                font-size: 18px;
+            }
+            
+            .enclosed-value {
+                font-size: 14px;
+            }
+            
+            .drag-hint {
+                font-size: 11px;
+                padding: 6px 10px;
+            }
+            
+            .puzzle-title {
+                font-size: 18px;
+            }
+            
+            .instructions {
+                font-size: 13px;
+                padding: 12px;
+            }
+            
+            .success-message {
+                font-size: 14px;
+                padding: 12px;
+            }
+            
+            .control-btn {
+                padding: 8px 16px;
+                font-size: 13px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .game-title {
+                font-size: 18px;
+            }
+            
+            .game-subtitle {
+                font-size: 12px;
+            }
+            
+            .language-selector {
+                top: 8px;
+                right: 8px;
+                padding: 3px;
+            }
+            
+            .globe-icon {
+                font-size: 14px;
+            }
+            
+            .language-select {
+                font-size: 11px;
+                padding: 2px 5px;
+            }
+            
+            .game-content {
+                padding: 12px;
+            }
+            
+            .puzzle-container {
+                padding: 15px;
+            }
+            
+            .gauss-visualization {
+                height: 250px;
+            }
+            
+            .gauss-charge {
+                width: 30px;
+                height: 30px;
+                font-size: 14px;
+            }
+            
+            .flux-indicator {
+                padding: 10px;
+                min-width: 110px;
+                max-width: 40%;
+            }
+            
+            .flux-value {
+                font-size: 16px;
+            }
+            
+            .enclosed-value {
+                font-size: 12px;
+            }
+            
+            .drag-hint {
+                font-size: 10px;
+                padding: 5px 8px;
+                max-width: 90%;
+            }
+            
+            .charge-info {
+                padding: 10px;
+            }
+            
+            .charge-item {
+                padding: 3px 6px;
+                font-size: 10px;
+            }
+            
+            .control-btn {
+                padding: 7px 14px;
+                font-size: 12px;
             }
         }
     </style>
@@ -481,7 +723,7 @@
     <div id="root"></div>
 
     <script type="text/babel">
-        const { useState, useEffect, useRef } = React;
+        const { useState, useEffect, useRef, useCallback } = React;
 
         // Translations for different languages
         const translations = {
@@ -589,7 +831,7 @@
 
         // Gauss Challenge Component
         const GaussChallenge = ({ translation, onComplete }) => {
-            const [surface, setSurface] = useState({ x: 300, y: 200, radius: 100 });
+            const [surface, setSurface] = useState({ x: 200, y: 150, radius: 80 });
             const [dragging, setDragging] = useState(false);
             const [dragStart, setDragStart] = useState({ x: 0, y: 0 });
             const [surfaceStart, setSurfaceStart] = useState({ x: 0, y: 0 });
@@ -597,21 +839,26 @@
             const [hasInteracted, setHasInteracted] = useState(false);
             const [previousEnclosed, setPreviousEnclosed] = useState(0);
             const [showDragHint, setShowDragHint] = useState(true);
-            const visualizationRef = useRef(null);
+            const [velocity, setVelocity] = useState({ x: 0, y: 0 });
+            const [lastPosition, setLastPosition] = useState({ x: 0, y: 0 });
+            const [lastTime, setLastTime] = useState(0);
             
-            // Fixed charges in the visualization
+            const visualizationRef = useRef(null);
+            const animationRef = useRef(null);
+            
+            // Fixed charges in the visualization - adjusted for mobile
             const charges = [
-                { id: 1, x: 150, y: 150, value: 5 },
-                { id: 2, x: 450, y: 150, value: -3 },
-                { id: 3, x: 300, y: 300, value: 7 },
-                { id: 4, x: 200, y: 350, value: -4 },
-                { id: 5, x: 400, y: 350, value: 2 },
-                { id: 6, x: 100, y: 250, value: -6 },
-                { id: 7, x: 500, y: 250, value: 4 }
+                { id: 1, x: 80, y: 80, value: 5 },
+                { id: 2, x: 320, y: 80, value: -3 },
+                { id: 3, x: 200, y: 200, value: 7 },
+                { id: 4, x: 120, y: 240, value: -4 },
+                { id: 5, x: 280, y: 240, value: 2 },
+                { id: 6, x: 50, y: 160, value: -6 },
+                { id: 7, x: 350, y: 160, value: 4 }
             ];
             
-            // Calculate enclosed charge and flux
-            const calculateEnclosedCharge = () => {
+            // Calculate enclosed charge and flux - memoized for performance
+            const calculateEnclosedCharge = useCallback(() => {
                 let enclosed = 0;
                 const enclosedCharges = [];
                 
@@ -627,7 +874,7 @@
                 });
                 
                 return { enclosed, enclosedCharges };
-            };
+            }, [surface]);
             
             const { enclosed, enclosedCharges } = calculateEnclosedCharge();
             const flux = enclosed * 8.99e9; // Simplified flux calculation
@@ -644,36 +891,95 @@
                 setPreviousEnclosed(enclosed);
             }, [enclosed]);
             
-            const handleMouseDown = (e) => {
-                e.preventDefault();
+            // Smooth momentum animation
+            const animateMomentum = useCallback(() => {
+                if (!dragging && (Math.abs(velocity.x) > 0.1 || Math.abs(velocity.y) > 0.1)) {
+                    setSurface(prev => {
+                        const newX = prev.x + velocity.x;
+                        const newY = prev.y + velocity.y;
+                        
+                        if (visualizationRef.current) {
+                            const rect = visualizationRef.current.getBoundingClientRect();
+                            const boundedX = Math.max(prev.radius, Math.min(rect.width - prev.radius, newX));
+                            const boundedY = Math.max(prev.radius, Math.min(rect.height - prev.radius, newY));
+                            
+                            return { ...prev, x: boundedX, y: boundedY };
+                        }
+                        
+                        return prev;
+                    });
+                    
+                    // Apply friction
+                    setVelocity(prev => ({
+                        x: prev.x * 0.95,
+                        y: prev.y * 0.95
+                    }));
+                    
+                    animationRef.current = requestAnimationFrame(animateMomentum);
+                }
+            }, [dragging, velocity]);
+            
+            useEffect(() => {
+                if (!dragging) {
+                    animationRef.current = requestAnimationFrame(animateMomentum);
+                }
+                
+                return () => {
+                    if (animationRef.current) {
+                        cancelAnimationFrame(animationRef.current);
+                    }
+                };
+            }, [dragging, animateMomentum]);
+            
+            const handleStart = (clientX, clientY, timestamp) => {
                 setDragging(true);
                 setShowDragHint(false);
+                setVelocity({ x: 0, y: 0 });
                 
                 if (visualizationRef.current) {
                     const rect = visualizationRef.current.getBoundingClientRect();
                     setDragStart({
-                        x: e.clientX - rect.left,
-                        y: e.clientY - rect.top
+                        x: clientX - rect.left,
+                        y: clientY - rect.top
                     });
                     setSurfaceStart({
                         x: surface.x,
                         y: surface.y
                     });
+                    setLastPosition({ x: surface.x, y: surface.y });
+                    setLastTime(timestamp);
                 }
             };
             
-            const handleMouseMove = (e) => {
+            const handleMove = (clientX, clientY, timestamp) => {
                 if (!dragging || !visualizationRef.current) return;
                 
                 const rect = visualizationRef.current.getBoundingClientRect();
-                const currentX = e.clientX - rect.left;
-                const currentY = e.clientY - rect.top;
+                const currentX = clientX - rect.left;
+                const currentY = clientY - rect.top;
                 
                 const deltaX = currentX - dragStart.x;
                 const deltaY = currentY - dragStart.y;
                 
                 const newX = surfaceStart.x + deltaX;
                 const newY = surfaceStart.y + deltaY;
+                
+                // Calculate velocity for momentum
+                if (lastTime > 0) {
+                    const deltaTime = timestamp - lastTime;
+                    const deltaPosX = newX - lastPosition.x;
+                    const deltaPosY = newY - lastPosition.y;
+                    
+                    if (deltaTime > 0) {
+                        setVelocity({
+                            x: deltaPosX / deltaTime * 16,
+                            y: deltaPosY / deltaTime * 16
+                        });
+                    }
+                }
+                
+                setLastPosition({ x: newX, y: newY });
+                setLastTime(timestamp);
                 
                 // Keep surface within bounds
                 const boundedX = Math.max(surface.radius, Math.min(rect.width - surface.radius, newX));
@@ -682,27 +988,62 @@
                 setSurface(prev => ({ ...prev, x: boundedX, y: boundedY }));
             };
             
-            const handleMouseUp = () => {
+            const handleEnd = () => {
                 setDragging(false);
             };
             
+            // Mouse event handlers
+            const handleMouseDown = (e) => {
+                e.preventDefault();
+                handleStart(e.clientX, e.clientY, performance.now());
+            };
+            
+            const handleMouseMove = (e) => {
+                handleMove(e.clientX, e.clientY, performance.now());
+            };
+            
+            const handleMouseUp = () => {
+                handleEnd();
+            };
+            
+            // Touch event handlers
+            const handleTouchStart = (e) => {
+                e.preventDefault();
+                if (e.touches.length === 1) {
+                    handleStart(e.touches[0].clientX, e.touches[0].clientY, performance.now());
+                }
+            };
+            
+            const handleTouchMove = (e) => {
+                e.preventDefault();
+                if (e.touches.length === 1) {
+                    handleMove(e.touches[0].clientX, e.touches[0].clientY, performance.now());
+                }
+            };
+            
+            const handleTouchEnd = (e) => {
+                e.preventDefault();
+                handleEnd();
+            };
+            
             const resetChallenge = () => {
-                setSurface({ x: 300, y: 200, radius: 100 });
+                setSurface({ x: 200, y: 150, radius: 80 });
                 setShowSuccess(false);
                 setHasInteracted(false);
                 setPreviousEnclosed(0);
                 setShowDragHint(true);
+                setVelocity({ x: 0, y: 0 });
             };
             
-            // Generate field lines for visual effect
-            const generateFieldLines = () => {
+            // Generate field lines for visual effect - optimized
+            const generateFieldLines = useCallback(() => {
                 const lines = [];
-                const numLines = 12;
+                const numLines = 10;
                 
                 for (let i = 0; i < numLines; i++) {
                     const angle = (i / numLines) * 2 * Math.PI;
-                    const startRadius = surface.radius + 10;
-                    const endRadius = surface.radius + 50;
+                    const startRadius = surface.radius + 8;
+                    const endRadius = surface.radius + 40;
                     
                     const startX = surface.x + startRadius * Math.cos(angle);
                     const startY = surface.y + startRadius * Math.sin(angle);
@@ -721,7 +1062,7 @@
                 }
                 
                 return lines;
-            };
+            }, [surface]);
             
             const fieldLines = generateFieldLines();
             
@@ -748,6 +1089,8 @@
                             onMouseMove={handleMouseMove}
                             onMouseUp={handleMouseUp}
                             onMouseLeave={handleMouseUp}
+                            onTouchMove={handleTouchMove}
+                            onTouchEnd={handleTouchEnd}
                         >
                             {/* Field lines */}
                             <div className="field-lines">
@@ -772,8 +1115,8 @@
                                     key={charge.id}
                                     className={`gauss-charge ${charge.value > 0 ? 'positive' : 'negative'} ${enclosedCharges.includes(charge.id) ? 'enclosed' : ''}`}
                                     style={{
-                                        left: charge.x - 25,
-                                        top: charge.y - 25
+                                        left: charge.x - 20,
+                                        top: charge.y - 20
                                     }}
                                 >
                                     {charge.value > 0 ? '+' : '-'}{Math.abs(charge.value)}
@@ -790,6 +1133,7 @@
                                     height: surface.radius * 2
                                 }}
                                 onMouseDown={handleMouseDown}
+                                onTouchStart={handleTouchStart}
                             >
                                 <div className="surface-handle" />
                             </div>
@@ -858,11 +1202,27 @@
             const [language, setLanguage] = useState('eng');
             const [completed, setCompleted] = useState(false);
             
-            const translation = translations[language];
+            // Get translation based on current language
+            const translation = translations[language] || translations.eng;
             
             const handleComplete = () => {
                 setCompleted(true);
             };
+            
+            const handleLanguageChange = (e) => {
+                const newLanguage = e.target.value;
+                setLanguage(newLanguage);
+                // Optional: Save to localStorage to remember user preference
+                localStorage.setItem('preferredLanguage', newLanguage);
+            };
+            
+            // Load saved language preference on component mount
+            useEffect(() => {
+                const savedLanguage = localStorage.getItem('preferredLanguage');
+                if (savedLanguage && translations[savedLanguage]) {
+                    setLanguage(savedLanguage);
+                }
+            }, []);
             
             return (
                 <div className="game-container">
@@ -874,7 +1234,7 @@
                             <select 
                                 className="language-select" 
                                 value={language}
-                                onChange={(e) => setLanguage(e.target.value)}
+                                onChange={handleLanguageChange}
                             >
                                 <option value="eng">English</option>
                                 <option value="tam">தமிழ்</option>
